@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Website Products</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <body>
+        <header>
+  
+        </header>
+  
+        <section>
+  
+        </section>
+  
+      <script>
+
+      const header = document.querySelector('header');
+      const section = document.querySelector('section');
+
+    fetch('http://localhost:5292/api/products') // Replace with your API URL
+        .then(response => response.json())
+        .then(data => {
+            populateHeader(data);
+            showUsers(data);
+        })
+        .catch(error => console.error('Error:', error));
+
+  
+  
+    //   let requestURL = 'https://fakestoreapi.com/products';
+    //   let request = new XMLHttpRequest();
+    //   request.open('GET', requestURL);
+    //   request.responseType = 'json';
+    //   request.send();
+  
+    //   request.onload = function() {
+    //     const websiteUsers = request.response;
+    //     populateHeader(websiteUsers);
+    //     showUsers(websiteUsers);
+    //   }
+  
+      function populateHeader(jsonObj) {
+        const myH1 = document.createElement('h1');
+        myH1.textContent = "Products of My Website";
+        header.appendChild(myH1);
+  
+      }
+  
+      function showUsers(jsonObj) {
+        const jsonData = jsonObj;//['data'];
+            
+        for (let i = 0; i < jsonData.length; i++) {
+          const myArticle = document.createElement('article');
+          const myH2 = document.createElement('h2');
+          const myPara1 = document.createElement('p');
+          const myPara2 = document.createElement('p');
+          const myPara3 = document.createElement('p');
+          const myPara4 = document.createElement('p');
+          const myPara5 = document.createElement('p');
+          const myPara6 = document.createElement('p');
+          
+          const image = document.createElement('img');
+  
+          myH2.textContent = jsonData[i].id;
+          myPara1.textContent = '' + jsonData[i].title;
+          myPara1.style.cssText += 'font-weight: bold;';
+  
+          myPara2.textContent = '$' + jsonData[i].price;
+          myPara2.style.cssText += 'font-weight: bold; color:green; font-size:1.2rem;';
+          myPara3.textContent = '' + jsonData[i].description;
+          myPara3.style.cssText += 'font-style: italic;';
+          image.src = jsonData[i].image;
+          myPara4.textContent = '' + jsonData[i].category;
+          myPara4.style.cssText += 'font-weight: bold;';
+          myPara5.textContent = '' + jsonData[i].rating + "⭐";
+          myPara5.style.cssText += 'font-weight: bold;';
+          myPara6.textContent =  jsonData[i].count + ' left';
+          myPara6.style.cssText += 'font-weight: bold; color:red';
+  
+          myArticle.appendChild(myH2);
+          myArticle.appendChild(myPara1);
+          myArticle.appendChild(myPara2);
+          myArticle.appendChild(myPara3);
+          myArticle.appendChild(image);
+          myArticle.appendChild(myPara4);
+          myArticle.appendChild(myPara5);
+          myArticle.appendChild(myPara6);
+  
+          section.appendChild(myArticle);
+        }
+  }
+</script>      
+
+</body>
+</html>
